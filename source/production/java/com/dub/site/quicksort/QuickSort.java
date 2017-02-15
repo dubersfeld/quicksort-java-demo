@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class implements the basic Quick Sort algorithm **/
+ * This class implements the basic Quick Sort algorithm 
+ * the pivot choice is deterministic or random according to the boolean parameter rand **/
 public class QuickSort {
 	
 	private List<Integer> values;
@@ -30,14 +31,21 @@ public class QuickSort {
 		values.set(j, temp);			
 	}
 
-	private int partition(int p, int r) {
+	private int partition(int p, int r, boolean rand) {
 				
-		int temp = values.get(r);
+	    if (rand) {
+            int ir = (int)Math.floor(Math.random() * (r - p + 1) + p);// from p to r included
+	
+            this.swap(r, ir);// preliminary random pivot swap
+            results.addResult(new ArrayList<Integer>(values));
+        }
+		
+		int pivot = values.get(r);
 					
 		int i = p;
 
 		for (int j = p; j < r; j++) {
-			if (values.get(j) <= temp) {
+			if (values.get(j) <= pivot) {
 				i++;
 				swap(i-1, j);
 				swapCount++;
@@ -55,8 +63,11 @@ public class QuickSort {
 		return i; 
 	}// partition
 	
-	// main method, non recursive quicksort implementation, using explicit stack
-    public void quickSort() {
+	/** main method, non recursive quicksort implementation, 
+	 * using explicit stack
+	 * using random pivot choice if rand == true
+	 */
+    public void quickSort(boolean rand) {
                 			
         Stack<Pair> stack = new Stack<>();
 
@@ -75,7 +86,7 @@ public class QuickSort {
         	p = top.getP();
         	r = top.getQ();
         	             
-        	q = partition(p, r);     
+        	q = partition(p, r, rand);     
         	     	
         	// push on stack
         	if (q > 0 && p < q-1) {                        

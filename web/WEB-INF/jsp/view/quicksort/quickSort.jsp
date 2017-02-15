@@ -27,7 +27,7 @@ function canvasSupport() {
 function canvasApp() {
 
     var N = 150;// number of elements to sort
-    var delay = 100;
+    var delay = 50;
 
     var randomized = false;
  
@@ -200,12 +200,16 @@ function canvasApp() {
     function startAnim() {// this is an event handler  
     	/* startAnim sends an AJAX request to the server. 
 	    This request should be an Array of integers */
-	    console.log("startAnim begin " + values);
+	    
+        var rand = $('#random').prop('checked');// random pivot choice selection
+	    
+        var message = {"rand": rand, "values": values};
+        
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
 			url : '<c:url value="/sort" />',
-			data : JSON.stringify(values),
+			data : JSON.stringify(message),
 			dataType : 'json',
 			timeout : 100000,
 			success : function(data) {
@@ -279,10 +283,9 @@ $(document).ready(canvasApp);
 
   <div id="intro">
   <h1>Quicksort algorithm demonstration</h1>
-  <p>I present here a Java based demonstration of the basic Quicksort algorithm.<br/>
-  Quicksort itself is implemented in Java.<br/> 
-  Javascript is used for randomization and display only. 
-  The number of values to be sorted is fixed to 150.
+  <p>I present here a Javascript only demonstration of Quicksort.<br/> 
+The number of values to be sorted is fixed to 150.<br/> The actual values are randomized.<br/>
+You can choose between the basic Quicksort and the version with random pivot choice.
   </p>
   </div>
 
@@ -303,6 +306,13 @@ $(document).ready(canvasApp);
   </div>
 
   <div id="controls">
+    <div>
+      <form id="partition">
+        <input type="checkbox" name="random" id="random">Random pivot choice<br>
+      </form>
+    </div>   
+  
+  
     <div id="randomize">
       <p>Click here to randomize the values to be sorted</p>
       <form name="initialize" id="initelem">

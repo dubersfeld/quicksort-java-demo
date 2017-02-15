@@ -21,13 +21,16 @@ public class QuickSortController {
 	
 	@RequestMapping(value="sort", method=RequestMethod.POST)
 	@ResponseBody
-	public  QuickSortResult sort(@RequestBody List<Integer> values) {
+	public  QuickSortResult sort(@RequestBody Message message) {
+			
+		List<Integer> values = message.getValues();
+		boolean rand = message.isRand();
 			
 		QuickSortResult results = new QuickSortResult();
-				
+		
 		QuickSort sorter = new QuickSort(values, results);
 		
-		sorter.quickSort();
+		sorter.quickSort(rand);
 		
 		return results;
 	}
