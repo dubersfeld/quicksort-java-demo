@@ -5,6 +5,8 @@ I present here an animated demonstration of Quick Sort algorithm running on HTML
 
 The user can choose between the basic version and the version with random pivot choice.
 
+For the deployement on Tomcat the context root is quick-sort
+
 For a Javascript only implementation please visit this repository:
 
 https://github.com/dubersfeld/quicksort-javascript-demo
