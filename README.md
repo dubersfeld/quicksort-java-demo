@@ -5,10 +5,8 @@ I present here an animated demonstration of Quick Sort algorithm running on HTML
 
 The user can choose between the basic version and the version with random pivot choice.
 
-For the deployement on Tomcat the context root is quick-sort
+To launch the demo run the command `mvn spring-boot:run` in project directory.
 
-For a Javascript only implementation please visit this repository:
-
-https://github.com/dubersfeld/quicksort-javascript-demo
+When the application has started open a browser and hit URL `localhost:8080/quick-sort`.
 
 Dominique Ubersfeld
